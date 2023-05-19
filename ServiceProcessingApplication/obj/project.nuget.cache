@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "Tdj/5Nodxhv8BIzMsH5YvgwCwTaiUlIwOtPv2mK7ZMhxqLEEqfcaP8sboKd/MgVHsdSDTJ/Ihh923wdrdO2EwA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\hoops\\source\\repos\\ServiceProcessingApplication\\ServiceProcessingApplication.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\hoops\\.nuget\\packages\\extended.wpf.toolkit\\4.5.0\\extended.wpf.toolkit.4.5.0.nupkg.sha512",
+    "C:\\Users\\hoops\\.nuget\\packages\\handycontrol\\3.4.0\\handycontrol.3.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}
