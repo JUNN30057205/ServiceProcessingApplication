@@ -190,11 +190,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\hoops\\source\\repos\\ServiceProcessingApplication\\ServiceProcessingApplication.csproj",
+      "projectUniqueName": "C:\\Users\\hoops\\Source\\Repos\\JUNN30057205\\ServiceProcessingApplication\\ServiceProcessingApplication\\ServiceProcessingApplication.csproj",
       "projectName": "ServiceProcessingApplication",
-      "projectPath": "C:\\Users\\hoops\\source\\repos\\ServiceProcessingApplication\\ServiceProcessingApplication.csproj",
+      "projectPath": "C:\\Users\\hoops\\Source\\Repos\\JUNN30057205\\ServiceProcessingApplication\\ServiceProcessingApplication\\ServiceProcessingApplication.csproj",
       "packagesPath": "C:\\Users\\hoops\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\hoops\\source\\repos\\ServiceProcessingApplication\\obj\\",
+      "outputPath": "C:\\Users\\hoops\\Source\\Repos\\JUNN30057205\\ServiceProcessingApplication\\ServiceProcessingApplication\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\hoops\\AppData\\Roaming\\NuGet\\NuGet.Config",
