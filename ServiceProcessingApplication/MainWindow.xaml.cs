@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -51,14 +52,15 @@ namespace ServiceProcessingApplication
                 !string.IsNullOrEmpty(TextBoxServiceProblem.Text) &&
                 !string.IsNullOrEmpty(TextBoxServiceCost.Text))
             {
-                Drone addDrone = new Drone();
+                Drone addDrone = new Drone();              
                 addDrone.SetClientName(TextBoxClientName.Text);
                 addDrone.SetDroneModel(TextBoxDroneModel.Text);
                 addDrone.SetServiceProblem(TextBoxServiceProblem.Text);
                 addDrone.SetServiceCost(double.Parse(TextBoxServiceCost.Text));
                 addDrone.SetServiceTag(int.Parse(Service_Tag.Text));
 
-               
+                IncrementServiceTag(GetService_Tag());
+
                 if (GetServicePrioriry() == 1)
                 {
                     RegularService.Enqueue(addDrone);
@@ -132,7 +134,66 @@ namespace ServiceProcessingApplication
                 });
             }
         }
-        //6.10	Create a custom keypress method to ensure the Service Cost textbox can only accept a double value with one decimal point.
+        //6.10	Create a custom keypress method to ensure the Service Cost textbox can only
+        //      accept a double value with one decimal point.
+        private void TextBoxServiceCost_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            //Regex regular = new Regex
+            //e.Handled = 
+        }
+
+        private Xceed.Wpf.Toolkit.IntegerUpDown GetService_Tag()
+        {
+            return Service_Tag;
+        }
+
+        //6.11	Create a custom method to increment the service tag control,
+        //      this method must be called inside the “AddNewItem” method before the new service item is added to a queue.
+        private void IncrementServiceTag(Xceed.Wpf.Toolkit.IntegerUpDown service_Tag)
+        {
+            int currentTag = (int)service_Tag.Value;
+            currentTag = currentTag + 10;
+            Service_Tag.Value = currentTag;
+        }
+        //6.12	Create a mouse click method for the regular service ListView that
+        //      will display the Client Name and Service Problem in the related textboxes.
+        private void ListViewRegular_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(ListViewRegular.SelectedIndex != -1)
+            {
+                int index = ListViewRegular.SelectedIndex;
+                TextBoxClientName.Text = RegularService.ElementAt(index).GetClientName();
+                TextBoxDroneModel.Text = RegularService.ElementAt(index).GetDroneModel();
+                TextBoxServiceProblem.Text = RegularService.ElementAt(index).GetServiceProblem();
+                TextBoxServiceCost.Text = RegularService.ElementAt(index).GetServiceCost().ToString();
+            }
+            else
+            {
+                ListViewRegular.UnselectAll();
+            }
+        }
+
+        //6.13	Create a mouse click method for the express service ListView that
+        //      will display the Client Name and Service Problem in the related textboxes.
+        private void ListViewExpress_selectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(ListViewExpress.SelectedIndex != -1)
+            {
+                int index = ListViewExpress.SelectedIndex;
+                TextBoxClientName.Text = ExpressService.ElementAt(index).GetClientName();
+                TextBoxDroneModel.Text = ExpressService.ElementAt(index).GetDroneModel();
+                TextBoxServiceProblem.Text = ExpressService.ElementAt(index).GetServiceProblem();
+                TextBoxServiceCost.Text = ExpressService.ElementAt(index).GetServiceCost().ToString();                
+            }
+            else 
+            {
+                ListViewExpress.UnselectAll();
+            }            
+        }
+
+        //
+
+
 
     }
 }
