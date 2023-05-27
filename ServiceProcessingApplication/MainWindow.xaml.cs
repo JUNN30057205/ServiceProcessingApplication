@@ -77,10 +77,11 @@ namespace ServiceProcessingApplication
                     
                 }
                 //clear textboxes
-                TextBoxClientName.Text = string.Empty;
-                TextBoxDroneModel.Text = string.Empty;
-                TextBoxServiceProblem.Text = string.Empty;
-                TextBoxServiceCost.Text = string.Empty;
+                ClearTextBoxes();
+                //TextBoxClientName.Text = string.Empty;
+                //TextBoxDroneModel.Text = string.Empty;
+                //TextBoxServiceProblem.Text = string.Empty;
+                //TextBoxServiceCost.Text = string.Empty;
             }
         }
         //6.7	Create a custom method called “GetServicePriority” which returns the value of the priority radio group.
@@ -135,11 +136,11 @@ namespace ServiceProcessingApplication
             }
         }
         //6.10	Create a custom keypress method to ensure the Service Cost textbox can only
-        //      accept a double value with one decimal point.
+        //      accept a double value with one decimal point. (Regex: Regular Expressions)
         private void TextBoxServiceCost_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            //Regex regular = new Regex
-            //e.Handled = 
+            Regex regular = new Regex(@"\d{1, 2}\d{1, 2}?$");
+            //e.Handled = !Regex.IsMatch(sender as TextBox).ToString.Insert(sender as TextBox).selectionstart, e.Text);
         }
 
         private Xceed.Wpf.Toolkit.IntegerUpDown GetService_Tag()
@@ -191,9 +192,41 @@ namespace ServiceProcessingApplication
             }            
         }
 
-        //
+        //6.14	Create a button click method that will remove a service item from the regular ListView and dequeue the regular service Queue<T> data structure.
+        //      The dequeued item must be added to the List<T> and displayed in the ListBox for finished service items.
+        private void ListViewRegular_PreviewMouseDown(object sender, MouseEventArgs e)
+        {
 
+        }
 
+        //6.15  Create a button click method that will remove a service item from the express ListView and deueue the express service Queue<T> data structure.
+        //      The dequeued item must be added to the List<T> and displayed in the ListBox for finished service items.
+        private void ListViewExpress_PreviewMouseDown(Object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void FinishedDisplay()
+        {
+            
+        }
+
+        //6.16  Create a double mouse click method that will delete a service item from the finished ListBox and
+        //      and remove the same item from the List<T>.
+        private void FinishedListBox_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            //index = listboxfinished.selectedindex;
+        }
+
+        //6.17  Create a custom method that will clear all the textboxes after each service item has been added.
+        private void ClearTextBoxes()
+        {
+            TextBoxClientName.Clear();
+            TextBoxDroneModel.Clear();
+            TextBoxServiceProblem.Clear();
+            TextBoxServiceCost.Clear();
+            
+        }
 
     }
 }

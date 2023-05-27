@@ -25,7 +25,7 @@
         <TextBox x:Name="TextBoxServiceProblem" HorizontalAlignment="Left" Margin="150,190,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155" FontSize="14" Height="115"/>
         <TextBox x:Name="TextBoxServiceCost" HorizontalAlignment="Left" Margin="150,323,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" FontSize="14" Height="35"/>
         <wpfx:IntegerUpDown x:Name="Service_Tag" Value="100" Minimum="100" Maximum="900" Increment="10" Margin="150,370,700,30" Width="100" Height="35" FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <ListView x:Name="ListViewRegular" Margin="340,50,245,260" ItemsSource="{Binding RegularService}" d:ItemsSource="{d:SampleData ItemCount=5}" SelectionChanged="ListViewRegular_SelectionChanged">
+        <ListView x:Name="ListViewRegular" Margin="340,50,245,260" ItemsSource="{Binding RegularService}" SelectionChanged="ListViewRegular_SelectionChanged" d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Client Name" DisplayMemberBinding="{Binding ClientName}"/>
