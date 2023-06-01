@@ -137,7 +137,7 @@ namespace ServiceProcessingApplication
         //6.10	Create a custom keypress method to ensure the Service Cost textbox can only
         //      accept a double value with one decimal point. (Regex: Regular Expressions)
         private void TextBoxServiceCost_PreviewTextInput_1(object sender, TextCompositionEventArgs e)
-        {           
+        {
             //^:start, \d+:0-9, (\.\d{0,1}):only accept one decimal, ?:0or1, $:finish...
             Regex regular = new Regex(@"^\d+(\.\d{0,1})?$");
             e.Handled = !regular.IsMatch((sender as TextBox).Text.Insert((sender as TextBox).SelectionStart, e.Text));
@@ -156,7 +156,6 @@ namespace ServiceProcessingApplication
         {
             return Service_Tag;
         }
-
 
         //6.12	Create a mouse click method for the regular service ListView that
         //      will display the Client Name and Service Problem in the related textboxes.
@@ -245,9 +244,6 @@ namespace ServiceProcessingApplication
             TextBoxServiceProblem.Clear();
             TextBoxServiceCost.Clear();
             
-        }
-
-        
-    }
-  
+        }        
+    }  
 }

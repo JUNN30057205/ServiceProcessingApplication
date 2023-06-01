@@ -58,7 +58,7 @@
         <ListBox x:Name="ListBoxFinishedService" Margin="780,50,27,174" MouseDoubleClick="ListBoxFinishedService_MouseDoubleClick"/>
         <Button x:Name="FinishedRegular" Content="Finished Service" HorizontalAlignment="Left" Margin="620,12,0,0" VerticalAlignment="Top" FontWeight="Bold" PreviewMouseDown="FinishedRegular_PreviewMouseDown_1" Height="30" Width="113"/>
         <Button x:Name="FinishedExpress" Content="Finished Service" HorizontalAlignment="Left" Margin="620,267,0,0" FontWeight="Bold" PreviewMouseDown="FinishedExpress_PreviewMouseDown" VerticalAlignment="Top" Height="30" Width="113"/>
-        <StatusBar Name="TextMessage" Margin="0,550,0,0" Height="49" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+        <StatusBar Name="TextMessage" Margin="0,540,0,0" Height="49" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
             <StatusBarItem Width="993">
                 <TextBlock>
 
