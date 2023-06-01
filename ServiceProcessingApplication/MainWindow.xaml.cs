@@ -16,10 +16,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TextBox = System.Windows.Controls.TextBox;
 using Window = System.Windows.Window;
 
 // ID: 3005205
-//Name:
+//Name: Jun Sumida
 //Asessment 3
 //Version 1
 
@@ -33,6 +34,7 @@ namespace ServiceProcessingApplication
         public MainWindow()
         {
             InitializeComponent();
+            
         }
         //6.2 Create a globel List<T> of type Drone called "FenishedList"
         List<Drone> FinishedList = new List<Drone>();
@@ -76,12 +78,9 @@ namespace ServiceProcessingApplication
                     DisplayExpressService();
                     
                 }
-                //clear textboxes
+                //Clear textboxes
                 ClearTextBoxes();
-                //TextBoxClientName.Text = string.Empty;
-                //TextBoxDroneModel.Text = string.Empty;
-                //TextBoxServiceProblem.Text = string.Empty;
-                //TextBoxServiceCost.Text = string.Empty;
+                
             }
         }
         //6.7	Create a custom method called “GetServicePriority” which returns the value of the priority radio group.
@@ -137,10 +136,20 @@ namespace ServiceProcessingApplication
         }
         //6.10	Create a custom keypress method to ensure the Service Cost textbox can only
         //      accept a double value with one decimal point. (Regex: Regular Expressions)
-        private void TextBoxServiceCost_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void TextBoxServiceCost_PreviewTextInput_1(object sender, TextCompositionEventArgs e)
+        {           
+            //^:start, \d+:0-9, (\.\d{0,1}):only accept one decimal, ?:0or1, $:finish...
+            Regex regular = new Regex(@"^\d+(\.\d{0,1})?$");
+            e.Handled = !regular.IsMatch((sender as TextBox).Text.Insert((sender as TextBox).SelectionStart, e.Text));
+        }
+        
+        //6.11	Create a custom method to increment the service tag control,
+        //      this method must be called inside the “AddNewItem” method before the new service item is added to a queue.
+        private void IncrementServiceTag(Xceed.Wpf.Toolkit.IntegerUpDown service_Tag)
         {
-            Regex regular = new Regex(@"\d{1, 2}\d{1, 2}?$");
-            //e.Handled = !Regex.IsMatch(sender as TextBox).ToString.Insert(sender as TextBox).selectionstart, e.Text);
+            int currentTag = (int) service_Tag.Value;
+            currentTag = currentTag + 10;
+            Service_Tag.Value = currentTag;
         }
 
         private Xceed.Wpf.Toolkit.IntegerUpDown GetService_Tag()
@@ -148,14 +157,7 @@ namespace ServiceProcessingApplication
             return Service_Tag;
         }
 
-        //6.11	Create a custom method to increment the service tag control,
-        //      this method must be called inside the “AddNewItem” method before the new service item is added to a queue.
-        private void IncrementServiceTag(Xceed.Wpf.Toolkit.IntegerUpDown service_Tag)
-        {
-            int currentTag = (int)service_Tag.Value;
-            currentTag = currentTag + 10;
-            Service_Tag.Value = currentTag;
-        }
+
         //6.12	Create a mouse click method for the regular service ListView that
         //      will display the Client Name and Service Problem in the related textboxes.
         private void ListViewRegular_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -194,28 +196,45 @@ namespace ServiceProcessingApplication
 
         //6.14	Create a button click method that will remove a service item from the regular ListView and dequeue the regular service Queue<T> data structure.
         //      The dequeued item must be added to the List<T> and displayed in the ListBox for finished service items.
-        private void ListViewRegular_PreviewMouseDown(object sender, MouseEventArgs e)
+        private void FinishedRegular_PreviewMouseDown_1(object sender, MouseButtonEventArgs e)
         {
+            if (RegularService.Count > 0)
+            {                
+                FinishedList.Add(RegularService.Dequeue());
+                DisplayRegularService();
+                DisplayFinishedService();
+            }
 
         }
 
         //6.15  Create a button click method that will remove a service item from the express ListView and deueue the express service Queue<T> data structure.
         //      The dequeued item must be added to the List<T> and displayed in the ListBox for finished service items.
-        private void ListViewExpress_PreviewMouseDown(Object sender, MouseEventArgs e)
+        private void FinishedExpress_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-
+            if (ExpressService.Count > 0)
+            {
+                FinishedList.Add(ExpressService.Dequeue());
+                DisplayExpressService();
+                DisplayFinishedService();
+            }
         }
 
-        private void FinishedDisplay()
+        private void DisplayFinishedService()
         {
-            
+            ListBoxFinishedService.Items.Clear();
+            foreach (Drone drone in FinishedList)
+            {
+                ListBoxFinishedService.Items.Add(drone.DisplayFinishedService());
+            }
         }
 
         //6.16  Create a double mouse click method that will delete a service item from the finished ListBox and
         //      and remove the same item from the List<T>.
-        private void FinishedListBox_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void ListBoxFinishedService_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //index = listboxfinished.selectedindex;
+            int index = ListBoxFinishedService.SelectedIndex;
+            FinishedList.RemoveAt(index);
+            DisplayFinishedService();
         }
 
         //6.17  Create a custom method that will clear all the textboxes after each service item has been added.
@@ -228,5 +247,7 @@ namespace ServiceProcessingApplication
             
         }
 
+        
     }
+  
 }
