@@ -39,6 +39,7 @@ namespace ServiceProcessingApplication
             TextBlock statusMS = StatusMS;
             statusMS.Text = "*Status Message";
         }
+
         //6.2 Create a globel List<T> of type Drone called "FenishedList"
         List<Drone> FinishedList = new List<Drone>();
         //6.3 Create a global List<T> of type of Drone called "RegularService"
@@ -46,6 +47,7 @@ namespace ServiceProcessingApplication
         //6.4 Create a global List<T> of type of Drone called "ExpressService"
         Queue<Drone> ExpressService = new Queue<Drone>();
 
+        #region AddNewItem
         //6.5 Create a button method called "AddNewItem" that will add a new service item to a Queue<> based on the priority
         //    Use Textboxes for the Client Name, Drone Model, Service Problem, and Service Cost.
         //    Use a numeric Up/Down control for the Service Tag.
@@ -70,7 +72,7 @@ namespace ServiceProcessingApplication
                 {
                     RegularService.Enqueue(addDrone);
                     DisplayRegularService();
-                    StatusMS.Text ="*New Items added to Regular Queue";
+                    StatusMS.Text ="*New Items added to Regular Service Queue";
                     
                 }
                 if(GetServicePrioriry() == 2)
@@ -79,7 +81,7 @@ namespace ServiceProcessingApplication
                     addDrone.SetServiceCost(double.Parse(TextBoxServiceCost.Text) * 1.15);
                     ExpressService.Enqueue(addDrone);
                     DisplayExpressService();
-                    StatusMS.Text = "*New Items added to Express Queue";
+                    StatusMS.Text = "*New Items added to Express Service Queue";
                 }
                 //Clear textboxes
                 ClearTextBoxes();                
@@ -88,6 +90,8 @@ namespace ServiceProcessingApplication
                 StatusMS.Text = "*Fill all items in the Textboxes";
             }
         }
+        #endregion
+        #region Service Pirority
         //6.7	Create a custom method called “GetServicePriority” which returns the value of the priority radio group.
         //      This method must be called inside the “AddNewItem” method before the new service item is added to a queue.
         private int GetServicePrioriry()
@@ -104,6 +108,8 @@ namespace ServiceProcessingApplication
 
             return prioriry;
         }
+        #endregion
+        #region Display Services
         //6.8	Create a custom method that will display all the elements in the RegularService queue.
         //      The display must use a List View and with appropriate column headers.
         private void DisplayRegularService()
@@ -140,6 +146,8 @@ namespace ServiceProcessingApplication
                 });
             }
         }
+        #endregion
+        #region ServiceCost and Tag
         //6.10	Create a custom keypress method to ensure the Service Cost textbox can only
         //      accept a double value with one decimal point. (Regex: Regular Expressions)
         private void TextBoxServiceCost_PreviewTextInput_1(object sender, TextCompositionEventArgs e)
@@ -163,7 +171,8 @@ namespace ServiceProcessingApplication
         {
             return Service_Tag;
         }
-
+        #endregion
+        #region Mouse Click
         //6.12	Create a mouse click method for the regular service ListView that
         //      will display the Client Name and Service Problem in the related textboxes.
         private void ListViewRegular_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -180,26 +189,28 @@ namespace ServiceProcessingApplication
             {
                 ListViewRegular.UnselectAll();
             }
+
         }
 
         //6.13	Create a mouse click method for the express service ListView that
         //      will display the Client Name and Service Problem in the related textboxes.
-        private void ListViewExpress_selectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ListViewExpress_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(ListViewExpress.SelectedIndex != -1)
+            if (ListViewExpress.SelectedIndex != -1)
             {
                 int index = ListViewExpress.SelectedIndex;
                 TextBoxClientName.Text = ExpressService.ElementAt(index).GetClientName();
                 TextBoxDroneModel.Text = ExpressService.ElementAt(index).GetDroneModel();
                 TextBoxServiceProblem.Text = ExpressService.ElementAt(index).GetServiceProblem();
-                TextBoxServiceCost.Text = ExpressService.ElementAt(index).GetServiceCost().ToString();                
+                TextBoxServiceCost.Text = ExpressService.ElementAt(index).GetServiceCost().ToString();
             }
-            else 
+            else
             {
                 ListViewExpress.UnselectAll();
-            }            
+            }
         }
-
+        #endregion
+        #region FinishedService Button click
         //6.14	Create a button click method that will remove a service item from the regular ListView and dequeue the regular service Queue<T> data structure.
         //      The dequeued item must be added to the List<T> and displayed in the ListBox for finished service items.
         private void FinishedRegular_PreviewMouseDown_1(object sender, MouseButtonEventArgs e)
@@ -238,7 +249,8 @@ namespace ServiceProcessingApplication
                 ListBoxFinishedService.Items.Add(drone.DisplayFinishedService());
             }
         }
-
+        #endregion
+        #region Double mouse click
         //6.16  Create a double mouse click method that will delete a service item from the finished ListBox and
         //      and remove the same item from the List<T>.
         private void ListBoxFinishedService_MouseDoubleClick(object sender, MouseButtonEventArgs e)
@@ -248,7 +260,8 @@ namespace ServiceProcessingApplication
             DisplayFinishedService();
             StatusMS.Text = "*Finished Service Items Deleted.";
         }
-
+        #endregion
+        #region ClearTextBox
         //6.17  Create a custom method that will clear all the textboxes after each service item has been added.
         private void ClearTextBoxes()
         {
@@ -257,6 +270,8 @@ namespace ServiceProcessingApplication
             TextBoxServiceProblem.Clear();
             TextBoxServiceCost.Clear();
             
-        }        
-    }  
+        }
+        #endregion
+
+    }
 }

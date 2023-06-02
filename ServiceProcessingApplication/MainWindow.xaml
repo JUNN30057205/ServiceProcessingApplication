@@ -43,7 +43,7 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <ListView x:Name="ListViewExpress" Margin="340,323,242,74">
+        <ListView x:Name="ListViewExpress" Margin="340,323,242,74" SelectionChanged="ListViewExpress_SelectionChanged">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Client Name" DisplayMemberBinding="{Binding ClientName}"/>
