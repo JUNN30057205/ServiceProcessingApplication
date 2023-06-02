@@ -7,7 +7,7 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:wpfx="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="MainWindow" Height="609" Width="996" Margin="0,0,0,0">
+        Title="MainWindow" Height="630" Width="999" Margin="0,0,0,0">
 
     <Grid Margin="1,1,1,1" Background="#FFC6EBED">
         <Grid.RowDefinitions>
@@ -58,11 +58,9 @@
         <ListBox x:Name="ListBoxFinishedService" Margin="780,50,27,174" MouseDoubleClick="ListBoxFinishedService_MouseDoubleClick"/>
         <Button x:Name="FinishedRegular" Content="Finished Service" HorizontalAlignment="Left" Margin="620,12,0,0" VerticalAlignment="Top" FontWeight="Bold" PreviewMouseDown="FinishedRegular_PreviewMouseDown_1" Height="30" Width="113"/>
         <Button x:Name="FinishedExpress" Content="Finished Service" HorizontalAlignment="Left" Margin="620,267,0,0" FontWeight="Bold" PreviewMouseDown="FinishedExpress_PreviewMouseDown" VerticalAlignment="Top" Height="30" Width="113"/>
-        <StatusBar Name="TextMessage" Margin="0,540,0,0" Height="49" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.5">
+        <StatusBar Name="StatusBarIcarus" Margin="0,540,0,0" Height="49" VerticalAlignment="Top">
             <StatusBarItem Width="993">
-                <TextBlock>
-
-                </TextBlock>
+                <TextBlock x:Name="StatusMS" Width="800" Foreground="#DC120DFB"></TextBlock>
             </StatusBarItem>
         </StatusBar>
     </Grid>

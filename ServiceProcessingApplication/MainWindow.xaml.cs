@@ -1,5 +1,6 @@
 ﻿using HandyControl.Controls;
 using HandyControl.Tools;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -9,6 +10,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -34,7 +36,8 @@ namespace ServiceProcessingApplication
         public MainWindow()
         {
             InitializeComponent();
-            
+            TextBlock statusMS = StatusMS;
+            statusMS.Text = "*Status Message";
         }
         //6.2 Create a globel List<T> of type Drone called "FenishedList"
         List<Drone> FinishedList = new List<Drone>();
@@ -48,11 +51,11 @@ namespace ServiceProcessingApplication
         //    Use a numeric Up/Down control for the Service Tag.
         //    The new service item will be added to the appropriate Queue based on the Priority radio button.
         private void AddNewItem_Click(object sender, RoutedEventArgs e)
-        {
+        {           
             if (!string.IsNullOrEmpty(TextBoxClientName.Text) &&
                 !string.IsNullOrEmpty(TextBoxDroneModel.Text) &&
                 !string.IsNullOrEmpty(TextBoxServiceProblem.Text) &&
-                !string.IsNullOrEmpty(TextBoxServiceCost.Text))
+                !string.IsNullOrEmpty(TextBoxServiceCost.Text))             
             {
                 Drone addDrone = new Drone();              
                 addDrone.SetClientName(TextBoxClientName.Text);
@@ -67,7 +70,7 @@ namespace ServiceProcessingApplication
                 {
                     RegularService.Enqueue(addDrone);
                     DisplayRegularService();
-                    //MessageBox.Show("New Items added to Regular queue");
+                    StatusMS.Text ="New Items added to Regular Queue";
                     
                 }
                 if(GetServicePrioriry() == 2)
@@ -76,11 +79,13 @@ namespace ServiceProcessingApplication
                     addDrone.SetServiceCost(double.Parse(TextBoxServiceCost.Text) * 1.15);
                     ExpressService.Enqueue(addDrone);
                     DisplayExpressService();
-                    
+                    StatusMS.Text = "New Items added to Express Queue";
                 }
                 //Clear textboxes
-                ClearTextBoxes();
-                
+                ClearTextBoxes();                
+            } else
+            {
+                StatusMS.Text = "Fill all items in the Textboxes";
             }
         }
         //6.7	Create a custom method called “GetServicePriority” which returns the value of the priority radio group.
@@ -113,6 +118,7 @@ namespace ServiceProcessingApplication
                     ServiceProblem = value.GetServiceProblem(),
                     Cost = value.GetServiceCost(),
                     Tag = value.GetServiceTag(),
+                    
                 });
             }
         }
@@ -139,16 +145,17 @@ namespace ServiceProcessingApplication
         private void TextBoxServiceCost_PreviewTextInput_1(object sender, TextCompositionEventArgs e)
         {
             //^:start, \d+:0-9, (\.\d{0,1}):only accept one decimal, ?:0or1, $:finish...
-            Regex regular = new Regex(@"^\d+(\.\d{0,1})?$");
-            e.Handled = !regular.IsMatch((sender as TextBox).Text.Insert((sender as TextBox).SelectionStart, e.Text));
+            Regex regular = new (@"^\d+(\.\d{0,1})?$");
+            e.Handled = !regular.IsMatch(((TextBox)sender).Text.Insert(((TextBox)sender).SelectionStart, e.Text));
         }
         
         //6.11	Create a custom method to increment the service tag control,
         //      this method must be called inside the “AddNewItem” method before the new service item is added to a queue.
         private void IncrementServiceTag(Xceed.Wpf.Toolkit.IntegerUpDown service_Tag)
         {
-            int currentTag = (int) service_Tag.Value;
-            currentTag = currentTag + 10;
+            int value = (int)service_Tag.Value;
+            int currentTag = value;
+            currentTag += 10;
             Service_Tag.Value = currentTag;
         }
 
@@ -202,6 +209,8 @@ namespace ServiceProcessingApplication
                 FinishedList.Add(RegularService.Dequeue());
                 DisplayRegularService();
                 DisplayFinishedService();
+                ClearTextBoxes();
+                StatusMS.Text = "Regular Service Removed from the Listview and Added to the Finished ListBox.";
             }
 
         }
@@ -215,6 +224,9 @@ namespace ServiceProcessingApplication
                 FinishedList.Add(ExpressService.Dequeue());
                 DisplayExpressService();
                 DisplayFinishedService();
+                ClearTextBoxes();
+                StatusMS.Text = "Express Service Removed from the Listview and Added to the Finished ListBox.";                
+                
             }
         }
 
@@ -234,6 +246,7 @@ namespace ServiceProcessingApplication
             int index = ListBoxFinishedService.SelectedIndex;
             FinishedList.RemoveAt(index);
             DisplayFinishedService();
+            StatusMS.Text = "Finished Service Items Deleted.";
         }
 
         //6.17  Create a custom method that will clear all the textboxes after each service item has been added.
