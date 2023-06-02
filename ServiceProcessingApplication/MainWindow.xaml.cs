@@ -70,7 +70,7 @@ namespace ServiceProcessingApplication
                 {
                     RegularService.Enqueue(addDrone);
                     DisplayRegularService();
-                    StatusMS.Text ="New Items added to Regular Queue";
+                    StatusMS.Text ="*New Items added to Regular Queue";
                     
                 }
                 if(GetServicePrioriry() == 2)
@@ -79,13 +79,13 @@ namespace ServiceProcessingApplication
                     addDrone.SetServiceCost(double.Parse(TextBoxServiceCost.Text) * 1.15);
                     ExpressService.Enqueue(addDrone);
                     DisplayExpressService();
-                    StatusMS.Text = "New Items added to Express Queue";
+                    StatusMS.Text = "*New Items added to Express Queue";
                 }
                 //Clear textboxes
                 ClearTextBoxes();                
             } else
             {
-                StatusMS.Text = "Fill all items in the Textboxes";
+                StatusMS.Text = "*Fill all items in the Textboxes";
             }
         }
         //6.7	Create a custom method called “GetServicePriority” which returns the value of the priority radio group.
@@ -210,7 +210,7 @@ namespace ServiceProcessingApplication
                 DisplayRegularService();
                 DisplayFinishedService();
                 ClearTextBoxes();
-                StatusMS.Text = "Regular Service Removed from the Listview and Added to the Finished ListBox.";
+                StatusMS.Text = "*Regular Service Removed from the Listview and Added to the Finished ListBox.";
             }
 
         }
@@ -225,7 +225,7 @@ namespace ServiceProcessingApplication
                 DisplayExpressService();
                 DisplayFinishedService();
                 ClearTextBoxes();
-                StatusMS.Text = "Express Service Removed from the Listview and Added to the Finished ListBox.";                
+                StatusMS.Text = "*Express Service Removed from the Listview and Added to the Finished ListBox.";                
                 
             }
         }
@@ -246,7 +246,7 @@ namespace ServiceProcessingApplication
             int index = ListBoxFinishedService.SelectedIndex;
             FinishedList.RemoveAt(index);
             DisplayFinishedService();
-            StatusMS.Text = "Finished Service Items Deleted.";
+            StatusMS.Text = "*Finished Service Items Deleted.";
         }
 
         //6.17  Create a custom method that will clear all the textboxes after each service item has been added.
