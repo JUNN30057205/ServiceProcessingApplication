@@ -172,7 +172,7 @@ namespace ServiceProcessingApplication
             return Service_Tag;
         }
         #endregion
-        #region Mouse Click
+        #region Mouse Click 
         //6.12	Create a mouse click method for the regular service ListView that
         //      will display the Client Name and Service Problem in the related textboxes.
         private void ListViewRegular_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -183,13 +183,13 @@ namespace ServiceProcessingApplication
                 TextBoxClientName.Text = RegularService.ElementAt(index).GetClientName();
                 TextBoxDroneModel.Text = RegularService.ElementAt(index).GetDroneModel();
                 TextBoxServiceProblem.Text = RegularService.ElementAt(index).GetServiceProblem();
-                TextBoxServiceCost.Text = RegularService.ElementAt(index).GetServiceCost().ToString();
+                //TextBoxServiceCost.Text = RegularService.ElementAt(index).GetServiceCost().ToString();
+                StatusMS.Text = "Display the Client Name and Service Problem";
             }
             else
             {
                 ListViewRegular.UnselectAll();
             }
-
         }
 
         //6.13	Create a mouse click method for the express service ListView that
@@ -202,7 +202,9 @@ namespace ServiceProcessingApplication
                 TextBoxClientName.Text = ExpressService.ElementAt(index).GetClientName();
                 TextBoxDroneModel.Text = ExpressService.ElementAt(index).GetDroneModel();
                 TextBoxServiceProblem.Text = ExpressService.ElementAt(index).GetServiceProblem();
-                TextBoxServiceCost.Text = ExpressService.ElementAt(index).GetServiceCost().ToString();
+                //TextBoxServiceCost.Text = ExpressService.ElementAt(index).GetServiceCost().ToString();
+                StatusMS.Text = "Display the Client Name and Service Problem";
+
             }
             else
             {
@@ -258,7 +260,7 @@ namespace ServiceProcessingApplication
             int index = ListBoxFinishedService.SelectedIndex;
             FinishedList.RemoveAt(index);
             DisplayFinishedService();
-            StatusMS.Text = "*Finished Service Items Deleted.";
+            StatusMS.Text = "*Finished service Items Deleted.";
         }
         #endregion
         #region ClearTextBox
@@ -272,6 +274,5 @@ namespace ServiceProcessingApplication
             
         }
         #endregion
-
     }
 }

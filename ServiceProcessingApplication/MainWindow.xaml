@@ -37,7 +37,7 @@
                 <GridView>
                     <GridViewColumn Header="Client Name" DisplayMemberBinding="{Binding ClientName}"/>
                     <GridViewColumn Header="Drone Model" DisplayMemberBinding="{Binding DroneModel}"/>
-                    <GridViewColumn Header="Service Problem" DisplayMemberBinding="{Binding ServiceProblem}"/>
+                    <GridViewColumn Header="Service Problem" DisplayMemberBinding="{Binding ServiceProblem}" Width="120"/>
                     <GridViewColumn Header="Cost" DisplayMemberBinding="{Binding Cost}"/>
                     <GridViewColumn Header="Tag" DisplayMemberBinding="{Binding Tag}"/>
                 </GridView>
@@ -48,7 +48,7 @@
                 <GridView>
                     <GridViewColumn Header="Client Name" DisplayMemberBinding="{Binding ClientName}"/>
                     <GridViewColumn Header="Drone Model" DisplayMemberBinding="{Binding DroneModel}"/>
-                    <GridViewColumn Header="Service Problem" DisplayMemberBinding="{Binding ServiceProblem}"/>
+                    <GridViewColumn Header="Service Problem" DisplayMemberBinding="{Binding ServiceProblem}" Width="120"/>
                     <GridViewColumn Header="Cost" DisplayMemberBinding="{Binding Cost}"/>
                     <GridViewColumn Header="Tag" DisplayMemberBinding="{Binding Tag}"/>
                 </GridView>
